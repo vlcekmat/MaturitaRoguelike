@@ -81,6 +81,12 @@ public class Player : MonoBehaviour
     void Update()
     {
         HandleControls();
+
+        if(Input.GetKeyDown("escape"))
+        {
+            Destroy(FindObjectOfType<SaveData>());
+            FindObjectOfType<MySceneManager>().LoadMainMenu();
+        }
     }
 
     void HandleControls()
