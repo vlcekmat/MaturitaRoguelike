@@ -17,6 +17,8 @@ public class RoomSpawner : MonoBehaviour
 
     private Minimap minimap;
 
+    private bool lastRoom = false;
+
 
     Gate.Directions[] directions = { Gate.Directions.UP, Gate.Directions.DOWN, Gate.Directions.LEFT, Gate.Directions.RIGHT };
 
@@ -43,7 +45,8 @@ public class RoomSpawner : MonoBehaviour
 
             // Choose random room
             if(i >= roomCount - 1)
-            {
+            {   
+                lastRoom = true;
                 roomToSpawn = exitRoomPrefab;
             }
             else
@@ -174,7 +177,7 @@ public class RoomSpawner : MonoBehaviour
                 break;
         }
 
-        if (!gateDatabase.Contains(transform.position + gateShift))
+        if (!gateDatabase.Contains(transform.position + gateShift) && !lastRoom)
         {
             transform.position = transform.position - roomShift;
             GameObject entranceGate = PlaceEntranceGate(direction);
